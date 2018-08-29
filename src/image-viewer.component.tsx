@@ -87,7 +87,7 @@ export default class ImageViewer extends React.Component<Props, State> {
       imageSizes.push({
         width: imageUrl.width || 0,
         height: imageUrl.height || 0,
-        status: 'loading'
+        status: 'success'
       });
     });
 
@@ -477,8 +477,8 @@ export default class ImageViewer extends React.Component<Props, State> {
           image.props.style = {
             ...this.styles.imageStyle, // User config can override above.
             ...image.props.style,
-            width,
-            height
+            width: this.width,
+            height: this.height
           };
 
           if (typeof image.props.source === 'number') {
@@ -492,6 +492,8 @@ export default class ImageViewer extends React.Component<Props, State> {
               ...image.props.source
             };
           }
+          image.props.digest = image.digest;
+          image.props.path = image.path;
 
           return (
             <ImageZoom
@@ -504,8 +506,8 @@ export default class ImageViewer extends React.Component<Props, State> {
               onLongPress={this.handleLongPressWithIndex.get(index)}
               onClick={this.handleClick}
               onDoubleClick={this.handleDoubleClick}
-              imageWidth={width}
-              imageHeight={height}
+              imageWidth={this.width}
+              imageHeight={this.height}
               enableSwipeDown={this.props.enableSwipeDown}
               onSwipeDown={this.handleSwipeDown}
             >
