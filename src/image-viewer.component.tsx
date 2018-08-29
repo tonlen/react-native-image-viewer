@@ -587,8 +587,13 @@ export default class ImageViewer extends React.Component<Props, State> {
    */
   public saveToLocal = () => {
     if (!this.props.onSave) {
-      CameraRoll.saveToCameraRoll(this.props.imageUrls[this.state.currentShowIndex || 0].url);
-      this!.props!.onSaveToCamera!(this.state.currentShowIndex);
+      CameraRoll.saveToCameraRoll(this.props.imageUrls[this.state.currentShowIndex || 0].url)
+      .then((result: any) => {
+        this!.props!.onSaveToCamera!(this.state.currentShowIndex);
+      });
+      .cacth((error: Error) => {
+        this!.props!.onSaveError!(error);
+      })
     } else {
       this.props.onSave(this.props.imageUrls[this.state.currentShowIndex || 0].url);
     }
