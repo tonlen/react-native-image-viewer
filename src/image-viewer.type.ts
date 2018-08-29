@@ -83,6 +83,19 @@ export class Props {
   };
 
   /**
+   * 图片保存到本地方法，如果写了这个方法，就不会调取系统默认方法
+   * 针对安卓不支持 saveToCameraRoll 远程图片，可以在安卓调用此回调，调用安卓原生接口
+   */
+  public onSave?: (url: string) => void = () => {
+    //
+  };
+
+  public onSaveError?: (error: Error) => void = () => {
+    //
+  };
+
+
+  /**
    * 自定义头部
    */
   public renderHeader?: (currentIndex?: number) => React.ReactElement<any> = () => {
