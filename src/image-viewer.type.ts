@@ -244,6 +244,10 @@ export interface IImageInfo {
    * 初始是否不超高 TODO:
    */
   freeWidth?: boolean;
+
+  digest?: string;
+
+  path?: string;
 }
 
 export interface IImageSize {
